@@ -50,3 +50,14 @@ To record rainfall in the database using five digits total (the precision) and t
 The two floating-point types are real and double precision. The difference between the two is how much data they store. The real type allows precision to six decimal digits, and double precision to 15 decimal points of precision, both of which include the number of digits on both sides of the point. These floating-point types are also called variable-precision types. The database stores the number in parts representing the digits and an exponent—the location where the decimal point belongs. So, unlike numeric, where we specify fixed precision and scale, the decimal point in a given column can “float” depending on the number.
 
 
+## Dates and Time
+PostgreSQL’s date and time support includes the four major data types
+* timestamp - storage size: 8 bytes  - description: Date and time - range: 4713 BC to 294276 AD
+* date - storage size: 4 bytes -description: Date (no time) -range 4713 BC to 5874897 AD
+* time - storage size:8 bytes -description: Time (no date) Range: 00:00:00 to 24:00:00
+* interval - storage size: 16bytes Range: Timeinterval +/−178,000,000years
+
+`timestamp` Records date and time, which are useful for a range of situations you might track: departures and arrivals of passenger flights, a schedule of Major League Baseball games, or incidents along a timeline. Typically, you’ll want to add the keywords with time zone to ensure that the time recorded for an event includes the time zone where it occurred. Otherwise, times recorded in various places around the globe become impossible to compare. The format timestamp with time zone is part of the SQL standard; with PostgreSQL you can specify the same data type using timestamptz.
+`date` Records just the date.
+`time` Records just the time. Again, you’ll want to add the with time zone keywords.
+`interval` Holds a value representing a unit of time expressed in the format quantity unit. It doesn’t record the start or end of a time period, only its length. Examples include 12 days or 8 hours. 
